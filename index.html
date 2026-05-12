@@ -1,14 +1,543 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>hola mundo</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#0a0814">
+<title>Para Belén</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Marcellus&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+  html, body {
+    width: 100%;
+    height: 100%;
+    height: 100dvh;
+    overflow: hidden;
+    background: #050309;
+    font-family: 'Cormorant Garamond', serif;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+
+  body {
+    background:
+      radial-gradient(ellipse at 30% 20%, #2a1838 0%, transparent 50%),
+      radial-gradient(ellipse at 70% 80%, #3a1a25 0%, transparent 55%),
+      radial-gradient(ellipse at center, #15102a 0%, #0a0814 60%, #050309 100%);
+  }
+
+  /* === CIELO ESTRELLADO === */
+  .sky {
+    position: fixed; inset: 0; pointer-events: none; z-index: 1;
+    background-image:
+      radial-gradient(1.5px 1.5px at 15% 25%, rgba(255, 230, 180, 0.7), transparent),
+      radial-gradient(1px 1px at 55% 65%, rgba(255, 220, 180, 0.5), transparent),
+      radial-gradient(1.5px 1.5px at 78% 18%, rgba(255, 240, 200, 0.6), transparent),
+      radial-gradient(1px 1px at 32% 82%, rgba(255, 225, 190, 0.4), transparent),
+      radial-gradient(2px 2px at 88% 48%, rgba(255, 235, 200, 0.7), transparent),
+      radial-gradient(1px 1px at 8% 58%, rgba(255, 220, 180, 0.4), transparent),
+      radial-gradient(1.5px 1.5px at 48% 8%, rgba(255, 240, 210, 0.6), transparent),
+      radial-gradient(1px 1px at 68% 88%, rgba(255, 230, 190, 0.5), transparent),
+      radial-gradient(1px 1px at 25% 45%, rgba(255, 225, 195, 0.4), transparent),
+      radial-gradient(1.5px 1.5px at 92% 72%, rgba(255, 235, 205, 0.5), transparent);
+    animation: twinkle 6s ease-in-out infinite alternate;
+  }
+  @keyframes twinkle {
+    0% { opacity: 0.4; }
+    100% { opacity: 1; }
+  }
+
+  /* === RESPLANDOR CÁLIDO === */
+  .glow {
+    position: fixed; inset: 0; pointer-events: none; z-index: 2;
+    background:
+      radial-gradient(circle at 20% 80%, rgba(255, 160, 110, 0.10) 0%, transparent 45%),
+      radial-gradient(circle at 80% 20%, rgba(180, 130, 220, 0.08) 0%, transparent 45%),
+      radial-gradient(circle at 50% 50%, rgba(255, 200, 150, 0.05) 0%, transparent 60%);
+    animation: breathe 10s ease-in-out infinite alternate;
+  }
+  @keyframes breathe {
+    0% { opacity: 0.6; transform: scale(1); }
+    100% { opacity: 1; transform: scale(1.08); }
+  }
+
+  /* === VIÑETA QUE RESPIRA === */
+  .vignette {
+    position: fixed; inset: 0; pointer-events: none; z-index: 15;
+    background: radial-gradient(ellipse at center, transparent 40%, rgba(5, 3, 9, 0.6) 100%);
+    animation: vignettePulse 8s ease-in-out infinite alternate;
+  }
+  @keyframes vignettePulse {
+    0% { opacity: 0.6; }
+    100% { opacity: 0.9; }
+  }
+
+  /* === LUCIÉRNAGAS === */
+  .fireflies { position: fixed; inset: 0; pointer-events: none; z-index: 3; }
+  .firefly {
+    position: absolute;
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255, 230, 140, 1) 0%, rgba(255, 200, 100, 0.5) 40%, transparent 70%);
+    opacity: 0;
+  }
+  @keyframes float-1 {
+    0%   { transform: translate(0, 0) scale(0.7); opacity: 0; }
+    10%  { opacity: 0.95; }
+    50%  { transform: translate(35vw, -25vh) scale(1.3); opacity: 0.7; }
+    90%  { opacity: 0.6; }
+    100% { transform: translate(70vw, -8vh) scale(0.9); opacity: 0; }
+  }
+  @keyframes float-2 {
+    0%   { transform: translate(0, 0) scale(1); opacity: 0; }
+    15%  { opacity: 0.85; }
+    50%  { transform: translate(-25vw, -35vh) scale(0.7); opacity: 1; }
+    85%  { opacity: 0.5; }
+    100% { transform: translate(-50vw, 8vh) scale(1.1); opacity: 0; }
+  }
+  @keyframes float-3 {
+    0%   { transform: translate(0, 0) scale(0.9); opacity: 0; }
+    20%  { opacity: 1; }
+    50%  { transform: translate(18vw, -45vh) scale(1.4); opacity: 0.7; }
+    80%  { opacity: 0.8; }
+    100% { transform: translate(45vw, -70vh) scale(0.8); opacity: 0; }
+  }
+  @keyframes glow-pulse {
+    0%, 100% { box-shadow: 0 0 10px 2px rgba(255, 220, 130, 0.6), 0 0 20px 6px rgba(255, 200, 100, 0.3); }
+    50%      { box-shadow: 0 0 18px 5px rgba(255, 235, 160, 0.9), 0 0 36px 10px rgba(255, 210, 120, 0.45); }
+  }
+
+  /* === POLVO DE LUZ === */
+  .dust { position: fixed; inset: 0; pointer-events: none; z-index: 3; }
+  .mote {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255, 240, 210, 0.7);
+    box-shadow: 0 0 6px rgba(255, 230, 180, 0.5);
+    opacity: 0;
+  }
+  @keyframes drift {
+    0%   { transform: translate(0, 110vh) scale(0.4); opacity: 0; }
+    10%  { opacity: 0.8; }
+    90%  { opacity: 0.6; }
+    100% { transform: translate(var(--drift-x, 10vw), -10vh) scale(1.2); opacity: 0; }
+  }
+
+  /* === PÉTALOS GHIBLI === */
+  .petals { position: fixed; inset: 0; pointer-events: none; z-index: 4; }
+  .petal {
+    position: absolute;
+    width: 12px; height: 12px;
+    background: radial-gradient(ellipse at 30% 30%, rgba(255, 200, 180, 0.7), rgba(220, 140, 160, 0.4));
+    border-radius: 0 100% 0 100%;
+    opacity: 0;
+    filter: blur(0.3px);
+  }
+  @keyframes petalFall {
+    0%   { transform: translate(0, -10vh) rotate(0deg); opacity: 0; }
+    10%  { opacity: 0.7; }
+    90%  { opacity: 0.6; }
+    100% { transform: translate(var(--petal-x, 20vw), 110vh) rotate(720deg); opacity: 0; }
+  }
+
+  /* === STAGE === */
+  .stage {
+    position: relative;
+    width: 100%; height: 100%;
+    z-index: 10;
+  }
+
+  .slide {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 2.8s ease-in-out;
+    padding: 4vh 4vw;
+  }
+  .slide.active { opacity: 1; }
+
+  /* === FOTO con Ken Burns === */
+  .photo-frame {
+    position: relative;
+    max-width: 86vw;
+    max-height: 75vh;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow:
+      0 0 50px 10px rgba(255, 180, 120, 0.20),
+      0 0 100px 25px rgba(255, 160, 100, 0.10),
+      0 25px 70px rgba(0, 0, 0, 0.6);
+  }
+  .photo-frame img {
+    display: block;
+    max-width: 86vw;
+    max-height: 75vh;
+    width: auto;
+    height: auto;
+    border-radius: 20px;
+    transform: scale(1.02);
+    transition: transform 8s ease-out;
+  }
+  .slide.active .photo-frame img {
+    animation: kenBurns 8s ease-out forwards;
+  }
+  @keyframes kenBurns {
+    0%   { transform: scale(1.02) translate(0, 0); }
+    100% { transform: scale(1.12) translate(-2%, -1.5%); }
+  }
+  .photo-frame::after {
+    content: '';
+    position: absolute; inset: 0;
+    border-radius: 20px;
+    box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.4);
+    pointer-events: none;
+  }
+  .photo-frame::before {
+    content: '';
+    position: absolute; inset: -2px;
+    border-radius: 22px;
+    background: linear-gradient(135deg, rgba(255, 200, 150, 0.3), transparent, rgba(255, 180, 130, 0.2));
+    z-index: -1;
+    filter: blur(8px);
+  }
+
+  /* === FRASE === */
+  .quote {
+    max-width: 90vw;
+    text-align: center;
+    color: #f5e6d3;
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-style: italic;
+    font-size: clamp(1.3rem, 5.5vw, 2.4rem);
+    line-height: 1.55;
+    letter-spacing: 0.015em;
+    text-shadow:
+      0 0 25px rgba(255, 200, 150, 0.35),
+      0 2px 10px rgba(0, 0, 0, 0.7);
+    padding: 0 1rem;
+  }
+  .quote .word {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(12px);
+    transition: opacity 1.2s ease-out, transform 1.2s ease-out;
+  }
+  .slide.active .quote .word {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .quote::before, .quote::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 1px;
+    margin: 1.2rem auto;
+    background: linear-gradient(90deg, transparent, rgba(255, 200, 150, 0.6), transparent);
+  }
+
+  /* === INTRO === */
+  .intro {
+    position: fixed; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    z-index: 30;
+    background: #050309;
+    color: #f5e6d3;
+    font-family: 'Marcellus', serif;
+    font-size: clamp(1.4rem, 6vw, 2.2rem);
+    letter-spacing: 0.2em;
+    opacity: 1;
+    transition: opacity 2s ease-in-out;
+    text-align: center;
+  }
+  .intro.hidden { opacity: 0; pointer-events: none; }
+  .intro span {
+    opacity: 0;
+    display: inline-block;
+    animation: fadeInLetter 3s ease-out forwards;
+  }
+  @keyframes fadeInLetter {
+    0%   { opacity: 0; transform: translateY(8px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+
+  /* === FINAL === */
+  .ending {
+    position: fixed; inset: 0;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    z-index: 25;
+    color: #f5e6d3;
+    text-align: center;
+    padding: 2rem;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 3s ease-in-out;
+  }
+  .ending.show { opacity: 1; }
+  .ending .heart {
+    font-size: clamp(2rem, 8vw, 3.5rem);
+    color: #ffb088;
+    text-shadow: 0 0 30px rgba(255, 170, 120, 0.6);
+    margin-bottom: 1rem;
+    animation: heartBeat 2.5s ease-in-out infinite;
+  }
+  @keyframes heartBeat {
+    0%, 100% { transform: scale(1); }
+    50%      { transform: scale(1.15); }
+  }
+  .ending .final-text {
+    font-family: 'Marcellus', serif;
+    font-size: clamp(1.4rem, 5vw, 2rem);
+    letter-spacing: 0.15em;
+  }
+  .ending .signed {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: clamp(1rem, 3.5vw, 1.3rem);
+    margin-top: 1.5rem;
+    opacity: 0.8;
+  }
+
+  /* === BOTÓN DE AUDIO === */
+  .audio-btn {
+    position: fixed;
+    bottom: 18px; right: 18px;
+    width: 38px; height: 38px;
+    border-radius: 50%;
+    background: rgba(255, 220, 180, 0.08);
+    border: 1px solid rgba(255, 220, 180, 0.25);
+    color: rgba(255, 230, 200, 0.7);
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+    z-index: 40;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    transition: opacity 1s ease, background 0.3s ease;
+    opacity: 0;
+  }
+  .audio-btn.visible { opacity: 1; }
+  .audio-btn:active { background: rgba(255, 220, 180, 0.2); }
+  .audio-btn svg { width: 18px; height: 18px; }
+
+</style>
 </head>
 <body>
-    <p>
-        hola putitos
-        sigueme en tu vieja
-    </p>
+
+<!-- ====== URLs DE LAS 5 FOTOS ====== -->
+<script>
+  const foto1 = "https://photos.fife.usercontent.google.com/pw/AP1GczNyHKrV-IqZUaOdtLC60C9-CTEjmhqi5ObrJTcQgSXMcq9_iYB-nqL1cA=w878-h494-s-no-gm?authuser=0";
+  const foto2 = "https://photos.fife.usercontent.google.com/pw/AP1GczNI3Uvw7L3bYVk0T7KQrHDtCSOkTlwP515olnUcKQ7P6KYG8V97d2fY_g=w878-h494-s-no-gm?authuser=0";
+  const foto3 = "https://photos.fife.usercontent.google.com/pw/AP1GczOYtrIErzKPGWRode_nzMCrLCh0WnGC7rNpNcx0tAwihcrUKLMVVw4Ptw=w878-h878-s-no-gm?authuser=0";
+  const foto4 = "https://photos.fife.usercontent.google.com/pw/AP1GczP-i2KKWsZemK_ZKQwQi8C4sofrmfQ6trQU9TOclgKkPbWy75DvOLN15w=w878-h659-s-no-gm?authuser=0";
+  const foto5 = "https://photos.fife.usercontent.google.com/pw/AP1GczNBOzBNj-HyjTYkONGrfKDUcs9W-Zatfb-thGevZQIB_v6kdLD2tTn0-Q=w878-h659-s-no-gm?authuser=0";
+  const musica = ""; // ej: "cancion.mp3" — dejá vacío si no querés sonido
+</script>
+<!-- ================================== -->
+
+<div class="sky"></div>
+<div class="glow"></div>
+<div class="fireflies" id="fireflies"></div>
+<div class="dust" id="dust"></div>
+<div class="petals" id="petals"></div>
+<div class="vignette"></div>
+
+<div class="intro" id="intro">
+  <div id="introText"></div>
+</div>
+
+<div class="stage" id="stage"></div>
+
+<div class="ending" id="ending">
+  <div class="heart">♡</div>
+  <div class="final-text">Te amo, Belén.</div>
+  <div class="signed">— Nico</div>
+</div>
+
+<button class="audio-btn" id="audioBtn" aria-label="Reproducir música">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M9 18V5l12-2v13"></path>
+    <circle cx="6" cy="18" r="3"></circle>
+    <circle cx="18" cy="16" r="3"></circle>
+  </svg>
+</button>
+
+<script>
+  // ====== FRASES ======
+  const frase1 = "Hay magia en lo simple: en tu voz despertando la casa, en el ronroneo a los pies de la cama, en el café que humea mientras me mirás.";
+
+  const frase2 = "Si la vida fuera una película de Ghibli, vos serías la luz que cruza la ventana, el viento tibio entre los árboles, el silencio que lo dice todo.";
+
+  const frase3 = "Te elijo en los días grises y en las siestas de domingo, cuando los gatos se acomodan entre nosotros y el mundo entero se vuelve pequeño y nuestro.";
+
+  const frase4 = "Tenés esa manera de hacer hogar donde antes solo había paredes. Caminás, y todo florece. Sonreís, y la noche se vuelve cálida.";
+
+  const frase5 = "Quiero seguir construyendo con vos esta vida de pequeñas magias: vos, yo, los gatos, y todas las primaveras que nos queden.";
+
+  // ====== INTRO ======
+  const introText = "Para Belén";
+  const introContainer = document.getElementById('introText');
+  introText.split('').forEach((ch, i) => {
+    const s = document.createElement('span');
+    s.textContent = ch === ' ' ? '\u00A0' : ch;
+    s.style.animationDelay = (0.2 + i * 0.18) + 's';
+    introContainer.appendChild(s);
+  });
+
+  // ====== ARMADO DEL CARRUSEL ======
+  const fotos = [foto1, foto2, foto3, foto4, foto5];
+  const frases = [frase1, frase2, frase3, frase4, frase5];
+  const stage = document.getElementById('stage');
+
+  function buildQuote(text) {
+    const wrap = document.createElement('div');
+    wrap.className = 'quote';
+    const words = text.split(' ');
+    words.forEach((w, i) => {
+      const span = document.createElement('span');
+      span.className = 'word';
+      span.textContent = w + ' ';
+      span.style.transitionDelay = (0.3 + i * 0.08) + 's';
+      wrap.appendChild(span);
+    });
+    return wrap;
+  }
+
+  const slides = [];
+  for (let i = 0; i < 5; i++) {
+    const photoSlide = document.createElement('div');
+    photoSlide.className = 'slide';
+    photoSlide.innerHTML = `<div class="photo-frame"><img src="${fotos[i]}" alt=""></div>`;
+    stage.appendChild(photoSlide);
+    slides.push(photoSlide);
+
+    const quoteSlide = document.createElement('div');
+    quoteSlide.className = 'slide';
+    quoteSlide.appendChild(buildQuote(frases[i]));
+    stage.appendChild(quoteSlide);
+    slides.push(quoteSlide);
+  }
+
+  let current = 0;
+  const SLIDE_DURATION = 7000;
+  let carouselInterval;
+
+  function vibrate() {
+    if (navigator.vibrate) navigator.vibrate(15);
+  }
+
+  function showSlide(index) {
+    slides.forEach((s, i) => s.classList.toggle('active', i === index));
+    vibrate();
+  }
+
+  function startCarousel() {
+    showSlide(0);
+    carouselInterval = setInterval(() => {
+      current++;
+      if (current >= slides.length) {
+        clearInterval(carouselInterval);
+        slides.forEach(s => s.classList.remove('active'));
+        setTimeout(() => {
+          document.getElementById('ending').classList.add('show');
+          vibrate();
+        }, 1500);
+        return;
+      }
+      showSlide(current);
+    }, SLIDE_DURATION);
+  }
+
+  // ====== INTRO ======
+  setTimeout(() => {
+    document.getElementById('intro').classList.add('hidden');
+    startCarousel();
+  }, 5000);
+
+  // ====== LUCIÉRNAGAS ======
+  const fireflyContainer = document.getElementById('fireflies');
+  const isMobile = window.innerWidth < 768;
+  const NUM_FIREFLIES = isMobile ? 14 : 22;
+
+  for (let i = 0; i < NUM_FIREFLIES; i++) {
+    const f = document.createElement('div');
+    f.className = 'firefly';
+    f.style.left = (Math.random() * 100) + 'vw';
+    f.style.top  = (Math.random() * 100) + 'vh';
+    const animType = (i % 3) + 1;
+    const duration = 14 + Math.random() * 14;
+    const delay = Math.random() * 18;
+    f.style.animation = `float-${animType} ${duration}s ease-in-out ${delay}s infinite, glow-pulse ${2 + Math.random() * 3}s ease-in-out infinite`;
+    fireflyContainer.appendChild(f);
+  }
+
+  // ====== POLVO DE LUZ ======
+  const dustContainer = document.getElementById('dust');
+  const NUM_MOTES = isMobile ? 30 : 50;
+
+  for (let i = 0; i < NUM_MOTES; i++) {
+    const m = document.createElement('div');
+    m.className = 'mote';
+    const size = 1.2 + Math.random() * 2.2;
+    m.style.width  = size + 'px';
+    m.style.height = size + 'px';
+    m.style.left = (Math.random() * 100) + 'vw';
+    m.style.setProperty('--drift-x', (Math.random() * 30 - 15) + 'vw');
+    const duration = 18 + Math.random() * 20;
+    const delay = Math.random() * 25;
+    m.style.animation = `drift ${duration}s linear ${delay}s infinite`;
+    dustContainer.appendChild(m);
+  }
+
+  // ====== PÉTALOS ======
+  const petalContainer = document.getElementById('petals');
+  const NUM_PETALS = isMobile ? 8 : 14;
+
+  for (let i = 0; i < NUM_PETALS; i++) {
+    const p = document.createElement('div');
+    p.className = 'petal';
+    const size = 8 + Math.random() * 10;
+    p.style.width  = size + 'px';
+    p.style.height = size + 'px';
+    p.style.left = (Math.random() * 100) + 'vw';
+    p.style.setProperty('--petal-x', (Math.random() * 40 - 20) + 'vw');
+    const duration = 14 + Math.random() * 12;
+    const delay = Math.random() * 20;
+    p.style.animation = `petalFall ${duration}s linear ${delay}s infinite`;
+    p.style.opacity = 0.5 + Math.random() * 0.3;
+    petalContainer.appendChild(p);
+  }
+
+  // ====== AUDIO OPCIONAL ======
+  const audioBtn = document.getElementById('audioBtn');
+  let audio = null;
+  let audioPlaying = false;
+
+  if (musica && musica.trim() !== "") {
+    audio = new Audio(musica);
+    audio.loop = true;
+    audio.volume = 0.35;
+
+    setTimeout(() => audioBtn.classList.add('visible'), 5500);
+
+    audioBtn.addEventListener('click', () => {
+      if (!audioPlaying) {
+        audio.play().catch(() => {});
+        audioPlaying = true;
+        audioBtn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="5" width="4" height="14"></rect><rect x="14" y="5" width="4" height="14"></rect></svg>';
+      } else {
+        audio.pause();
+        audioPlaying = false;
+        audioBtn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle></svg>';
+      }
+    });
+  }
+</script>
+
 </body>
 </html>
